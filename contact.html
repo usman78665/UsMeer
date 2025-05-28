@@ -161,7 +161,7 @@
 </footer>
 <script>
     document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -173,16 +173,16 @@
             return;
         }
 
-        // Show the success message
+        
         const successMessage = document.getElementById('formSuccess');
         successMessage.style.display = 'block';
 
-        // Optionally hide it after 5 seconds
+        
         setTimeout(() => {
             successMessage.style.display = 'none';
         }, 5000);
 
-        // Reset the form
+        
         this.reset();
     });
 </script>
