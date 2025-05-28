@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="timetable.html">Timetable</a></li>
+      <li><a href="instructors.html">Instructors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a class="active" href="register.html">Register</a></li>
+      <li><a href="login.html">Login</a></li>
+    <li><a id="logoutLink" href="login.html" style="display:none;">Logout</a></li></ul>
+  </nav>
+</header>
+<main class="container">
+  <h2>Register</h2>
+  <form id="registerForm">
+    <label>Email: <input type="email" id="email" required /></label><br/>
+    <label>Password: <input type="password" id="password" required /></label><br/>
+    <button type="submit" class="btn">Register</button>
+  </form>
+  <p id="message"></p>
+</main>
+<script>
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  if (localStorage.getItem(email)) {
+    document.getElementById('message').textContent = 'User already exists!';
+    document.getElementById('message').style.color = 'red';
+  } else {
+    localStorage.setItem(email, password);
+    document.getElementById('message').textContent = 'Registration successful. You can now login.';
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('registerForm').reset();
+  }
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const email = localStorage.getItem('loggedInUser');
+  if (email) {
+    const logoutLink = document.getElementById('logoutLink');
+    if (logoutLink) {
+      logoutLink.style.display = 'inline';
+      logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('loggedInUser');
+        window.location.href = 'login.html';
+      });
+    }
+  }
+});
+</script>
+
+</body>
+</html>
